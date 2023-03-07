@@ -1,0 +1,5 @@
+venv*
+*venv
+venv-p-coin
+__pycache__*
+__pycache__
