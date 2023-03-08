@@ -5,7 +5,7 @@ from sqlalchemy import delete
 from sqlalchemy.ext.asyncio.session import async_session
 from sqlalchemy.future import select
 
-#from database.connection import async_session
+from database.connection import async_session
 from database.models import Favorite, User
 
 

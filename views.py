@@ -11,54 +11,59 @@ user_router = APIRouter(prefix='/user')
 assets_router = APIRouter(prefix='/assets')
 
 
-@user_router.post('/create', description='My description',
+@user_router.post('/create', description='Criação de usuário',
                   response_model=StandardOutput,
                   responses={400: {'model': ErrorOutPut}}
                   )
 async def user_create(user_input: UserCreateInput):
     try:
         await UserService.create_user(name=user_input.name)
-        return StandardOutput(message='Ok')
+        return StandardOutput(message='Usuário cadastrado com sucesso!')
     except Exception as error:
         raise HTTPException(400, detail=str(error))
 
 
-@user_router.delete('/delete/{user_id}', response_model=StandardOutput,
+@user_router.delete('/delete/{user_id}', description='Deletar usuário',
+                    response_model=StandardOutput,
                     responses={400: {'model': ErrorOutPut}}
                     )
 async def user_delete(user_id: int):
     try:
         await UserService.delete_user(user_id)
-        return StandardOutput(message='Ok')
+        return StandardOutput(message='Deletado com sucesso.')
     except Exception as error:
         raise HTTPException(400, detail=str(error))
 
 
-@user_router.post('/favorite/add', response_model=StandardOutput,
+@user_router.post('/favorite/add', description='Adicionar moeda aos favoritos',
+                  response_model=StandardOutput,
                   responses={400: {'model': ErrorOutPut}}
                   )
 async def user_favorite_add(favorite_add: UserFavoriteAddInput):
     try:
         await FavoriteService.add_favorite(user_id=favorite_add.user_id,
                                            symbol=favorite_add.symbol)
-        return StandardOutput(message='Ok')
+        return StandardOutput(message='Moeda adicionada aos favoritos.')
     except Exception as error:
         raise HTTPException(400, detail=str(error))
 
 
 @user_router.delete('/favorite/remove/{user_id}',
+                    description='Remover moeda de favoritos',
                     response_model=StandardOutput,
                     responses={400: {'model': ErrorOutPut}}
                     )
 async def user_favorite_remove(user_id: int, symbol: str):
     try:
         await FavoriteService.remove_favorite(user_id=user_id, symbol=symbol)
-        return StandardOutput(message='Ok')
+        return StandardOutput(message='Moeda removida.')
     except Exception as error:
         raise HTTPException(400, detail=str(error))
 
 
-@user_router.get('/list', response_model=List[UserListoutput],
+@user_router.get('/list',
+                 description='Listar usuário com suas moedas favoritas',
+                 response_model=List[UserListoutput],
                  responses={400: {'model': ErrorOutPut}}
                  )
 async def user_list():
