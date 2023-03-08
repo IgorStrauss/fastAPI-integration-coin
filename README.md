@@ -42,3 +42,6 @@ Favorite:
     id        -   int(pk)
     symbol    -   string
     user_id   -   int(fk)
+
+Caso necessário no momento de startup a aplicação, utilizar:
+    export DATABASE_URL=postgresql+asyncpg://admin:admin@localhost:5432/fastapi

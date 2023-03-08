@@ -13,7 +13,7 @@ def first():
 
 @router.get("/teste")
 def teste_router():
-    return "rota de teste funcionando 1"
+    return "rota de teste ativa"
 
 
 app.include_router(prefix='/first', router=router)
