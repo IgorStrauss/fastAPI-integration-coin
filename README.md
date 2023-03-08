@@ -40,5 +40,5 @@ Models:
 Favorite:
 
     id        -   int(pk)
-    asset_    -   string
+    symbol    -   string
     user_id   -   int(fk)
